@@ -3,6 +3,7 @@ import cors from "cors";       // hacer npm i cors
 import config from './configs/db-config.js'; // archivo con tus datos de conexión
 import pkg from 'pg';
 
+
 const { Client } = pkg;
 const app = express();
 const port = 3000;

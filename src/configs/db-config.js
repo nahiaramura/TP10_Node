@@ -1,10 +1,12 @@
-const config = {
-    user: 'postgres.duhluatfqajyyemuefwy',
-    host: 'aws-0-sa-east-1.pooler.supabase.com',
-    database: 'postgres',
-    password: 'nahiaramuracontra',
-    port: 5432,
+import 'dotenv/config'
+
+const DBconfig = {
+    user: process.env.USER    ?? '',
+    host: process.env.DB_HOST   ?? '' ,
+    database: process.env.DB_DATABASE    ?? '',
+    password: process.env.DB_PASSWORD    ?? '',
+    port: process.env.DB_PORT    ?? '',
   };  
 
-export default config;
+export default DBconfig;
 

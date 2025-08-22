@@ -19,3 +19,8 @@ export const actualizarAlumno = async (alumno) => {
 export const eliminarAlumno = async (id) => {
     return await alumnoRepo.deleteAlumnoById(id);
 };
+
+export const actualizarImagen = async (id, filename) => {
+    return await alumnoRepo.updateAlumnoImagen(id, filename);
+  };
+  

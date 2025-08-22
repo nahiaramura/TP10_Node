@@ -304,3 +304,6 @@ INSERT INTO alumnos_grupos_pdp (id_grupo_pdp, id_alumno) VALUES (31, 118);
 INSERT INTO alumnos_grupos_pdp (id_grupo_pdp, id_alumno) VALUES (31, 119);
 INSERT INTO alumnos_grupos_pdp (id_grupo_pdp, id_alumno) VALUES (32, 120);
 INSERT INTO alumnos_grupos_pdp (id_grupo_pdp, id_alumno) VALUES (32, 121);
+
+
+ALTER TABLE alumnos ADD COLUMN IF NOT EXISTS imagen VARCHAR(255);

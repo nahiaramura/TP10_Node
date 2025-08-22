@@ -71,3 +71,18 @@ export const deleteAlumnoById = async (id) => {
         await client.end();
     }
 };
+
+export const updateAlumnoImagen = async (id, filename) => {
+    const client = new Client(config);
+    await client.connect();
+    try {
+      const result = await client.query(
+        `UPDATE alumnos SET imagen = $2 WHERE id = $1 RETURNING *`,
+        [id, filename]
+      );
+      return result.rows[0] || null;
+    } finally {
+      await client.end();
+    }
+  };
+  

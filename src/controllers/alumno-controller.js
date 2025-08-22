@@ -1,8 +1,23 @@
 import express from 'express';
 import * as alumnoService from '../services/alumno-service.js';
+import multer from 'multer';
+import path from 'path';
+
 
 const router = express.Router();
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, path.join(process.cwd(), 'uploads'));
+    },
+    filename: function (req, file, cb) {
+      const ext = path.extname(file.originalname || '') || '.jpg';
+      cb(null, `alumno_${req.params.id}_${Date.now()}${ext}`);
+    }
+  });
+  const upload = multer({ storage });
+
+  
 router.get('/', async (req, res, next) => {
     try {
         const alumnos = await alumnoService.obtenerTodos();
@@ -57,4 +72,19 @@ router.delete('/:id', async (req, res, next) => {
     }
 });
 
+router.post('/:id/photo', upload.single('image'), async (req, res, next) => {
+    try {
+      const id = Number(req.params.id);
+      if (!req.file) {
+        return res.status(400).json({ error: 'Debe enviar una imagen en el campo "image" (multipart/form-data).' });
+      }
+      const filename = req.file.filename;
+      const updated = await alumnoService.actualizarImagen(id, filename);
+      const url = `/static/${filename}`;
+      res.status(201).json({ id, filename, url, alumno: updated });
+    } catch (error) {
+      next(error);
+    }
+  });
+  
 export default router;
